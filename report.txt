@@ -1,0 +1,38 @@
+-->Description détaillée de l'environnement : 
+*LunarLander-v2 est un environnement Gym : l'agent doit faire un atterrissage sur une zone bien determinée du sol lunaire. 
+*La récompense pour le passage du haut de l'écran à l'aire d'atterrissage avec une vitesse nulle est d'environ 100 à 140 points. 
+*Si l'atterrisseur s'éloigne de la piste d'atterrissage, il perd sa récompense. 
+*L'épisode se termine si l'atterrisseur s'écrase ou s'immobilise,recevant -100 ou +100 points supplémentaires.
+*Le tir du moteur principal est de -0,3 points par image.
+*Il est possible d'atterrir à l'extérieur de la piste d'atterrissage.
+*Le carburant est infini, donc un agent peut apprendre à voler puis atterrir du premier coup.
+*Quatre actions discrètes disponibles : 
+*ne rien faire, tirer sur le moteur d'orientation à gauche, tirer sur le moteur principal, tirer sur le moteur d'orientation à droite.
+
+-->Description détaillée de l'implementation:
+*la classe ReplayBuffer represente la memoire qui contient les experiences.
+*on a definit la fonction build_dqn pour representer le reseau de neurones.
+*la classe Agent represente l'agent, il a une memoire (la méthode remember), il peut choisir une action (la methode choose_action)selon 
+ le principe d'exploitation ou d'exploration et apprend (la methode learn) en choisissant une taille bien determiné d'experience(batch size) a partie de la memoire.
+ la fonction plotLearning pour la representation
+*le main: on a fait l'instanciation de l'environnement,on choisit le learning rate,le nombre de jeu et on fait l'instanciation de l'agent.
+ l'agent va faire l'apprentissage pour un nombre d'episodes bien determiné (n_games).
+-->Algorithme d'apprentissage:
+*nous construisons une base de données à partir des expériences. 
+ En d’autres termes, chaque quadruplet état-action-récompense-état (s,a,r,s′) est stocké dans notre base de données(memoire). 
+ Puis, nous échantillonnons aléatoirement de cette base de données un quadruplet qui servira d’échantillon d’apprentissage.
+ on manipule deux reseaux de neurones,un reseau qui sera actualisé a chaque pas et un autre qui sera actualisé chaque 100 pas.
+-->les hyperparamètres de l'agent:
+*alpha
+*gamma
+*n_actions
+*epsilon
+*batch_size
+*epsilon_dec=0.996
+*epsilon_end
+*number_steps_to_update_target_network=100
+*mem_size
+-->Architecture de modele et ses hyperparamètres:
+*le modele est composé de: une couche d'entrée qui prend la dimension de l'état(state) et deux couches (fully connected layers) et une couche de sortie.
+
+
