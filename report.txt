@@ -10,18 +10,33 @@
 *ne rien faire, tirer sur le moteur d'orientation à gauche, tirer sur le moteur principal, tirer sur le moteur d'orientation à droite.
 
 -->Description détaillée de l'implementation:
-*la classe ReplayBuffer represente la memoire qui contient les experiences.
-*on a definit la fonction build_dqn pour representer le reseau de neurones.
-*la classe Agent represente l'agent, il a une memoire (la méthode remember), il peut choisir une action (la methode choose_action)selon 
- le principe d'exploitation ou d'exploration et apprend (la methode learn) en choisissant une taille bien determiné d'experience(batch size) a partie de la memoire.
- la fonction plotLearning pour la representation
-*le main: on a fait l'instanciation de l'environnement,on choisit le learning rate,le nombre de jeu et on fait l'instanciation de l'agent.
- l'agent va faire l'apprentissage pour un nombre d'episodes bien determiné (n_games).
+
+ DQN:
+  *la classe ReplayBuffer represente la memoire qui contient les experiences. 
+  *on a definit la fonction build_dqn pour representer le reseau de neurones.
+  *la classe Agent represente l'agent, il a une memoire (la méthode remember), il peut choisir une action (la methode choose_action)selon 
+   le principe d'exploitation ou d'exploration et apprend (la methode learn) en choisissant une taille bien determiné d'experience(batch size) a partie de la
+   memoire
+  *la fonction plotLearning pour la representation
+  *le main: on a fait l'instanciation de l'environnement,on choisit le learning rate,le nombre de jeu et on fait l'instanciation de l'agent.
+   l'agent va faire l'apprentissage pour un nombre d'episodes bien determiné (n_games).
+   
+ Duel_DQN:
+  *les classes sont les memes sauf pour le reseau de neurone qui est defini par la classe DuelingDeepQNetwork.
+  
 -->Algorithme d'apprentissage:
-*nous construisons une base de données à partir des expériences. 
- En d’autres termes, chaque quadruplet état-action-récompense-état (s,a,r,s′) est stocké dans notre base de données(memoire). 
- Puis, nous échantillonnons aléatoirement de cette base de données un quadruplet qui servira d’échantillon d’apprentissage.
- on manipule deux reseaux de neurones,un reseau qui sera actualisé a chaque pas et un autre qui sera actualisé chaque 100 pas.
+ DQN:
+  *nous construisons une base de données à partir des expériences. 
+   En d’autres termes, chaque quadruplet état-action-récompense-état (s,a,r,s′) est stocké dans notre base de données(memoire). 
+   Puis, nous échantillonnons aléatoirement de cette base de données un quadruplet qui servira d’échantillon d’apprentissage.
+   on manipule deux reseaux de neurones,un reseau qui sera actualisé a chaque pas et un autre qui sera actualisé chaque 100 pas.
+ Duel_DQN:
+  *Dueling DQN utilise un Dueling Q Head spécialisé afin de séparer Q en un flux A (avantage) et un flux V. L'ajout de ce type de structure à la tête de réseau      permet au réseau de mieux différencier les actions les unes des autres, et améliore considérablement l'apprentissage.
+   Dans de nombreux États, les valeurs des différentes actions sont très similaires et l'action à entreprendre est moins importante.
+   Ceci est particulièrement important dans les environnements où il existe de nombreuses actions parmi lesquelles choisir. Dans DQN, à chaque itération 
+   d'apprentissage, pour chacun des états du lot, nous mettons à jour les valeurs :ath:`Q` uniquement pour les actions spécifiques entreprises dans ces états.
+   Cela se traduit par un apprentissage plus lent car nous n'apprenons pas les valeurs Q pour les actions qui n'ont pas encore été prises. Sur l'architecture de
+   duel, en revanche, l'apprentissage est plus rapide - car nous commençons à apprendre la valeur d'état même si une seule action a été entreprise à ce stade.
 -->les hyperparamètres de l'agent:
 *alpha
 *gamma
@@ -33,6 +48,8 @@
 *number_steps_to_update_target_network=100
 *mem_size
 -->Architecture de modele et ses hyperparamètres:
-*le modele est composé de: une couche d'entrée qui prend la dimension de l'état(state) et deux couches (fully connected layers) et une couche de sortie.
-
-
+*le modele est composé de: une couche d'entrée qui prend la dimension de l'état(state) et deux couches (fully connected layers) 
+ et une couche de sortie qui va prédire la valeur Q de chaque action.
+-->Resultat:
+*Apres 50 episodes, la valeur d'epsilon tend vers epsilon_min qui est egal a 0.01 et le score augmente.
+*Apres 150 episodes, la valeur d'epsilon tend vers epsilon_min qui est egal a 0.01 et le score augmente considerablement.
