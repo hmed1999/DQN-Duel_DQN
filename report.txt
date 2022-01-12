@@ -51,5 +51,7 @@
 *le modele est composé de: une couche d'entrée qui prend la dimension de l'état(state) et deux couches (fully connected layers) 
  et une couche de sortie qui va prédire la valeur Q de chaque action.
 -->Resultat:
-*Apres 50 episodes, la valeur d'epsilon tend vers epsilon_min qui est egal a 0.01 et le score augmente.
-*Apres 150 episodes, la valeur d'epsilon tend vers epsilon_min qui est egal a 0.01 et le score augmente considerablement.
+ DQN:
+  *Apres 50 episodes, la valeur d'epsilon tend vers epsilon_min qui est egal a 0.01 et le score augmente.
+ Duel_DQN: 
+  *Apres 150 episodes, la valeur d'epsilon tend vers epsilon_min qui est egal a 0.01 et le score augmente considerablement.
