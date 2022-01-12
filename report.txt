@@ -31,7 +31,8 @@
    Puis, nous échantillonnons aléatoirement de cette base de données un quadruplet qui servira d’échantillon d’apprentissage.
    on manipule deux reseaux de neurones,un reseau qui sera actualisé a chaque pas et un autre qui sera actualisé chaque 100 pas.
  Duel_DQN:
-  *Dueling DQN utilise un Dueling Q Head spécialisé afin de séparer Q en un flux A (avantage) et un flux V. L'ajout de ce type de structure à la tête de réseau      permet au réseau de mieux différencier les actions les unes des autres, et améliore considérablement l'apprentissage.
+  *Dueling DQN utilise un Dueling Q Head spécialisé afin de séparer Q en un flux A (avantage) et un flux V. L'ajout de ce type de structure à la tête de réseau
+   permet au réseau de mieux différencier les actions les unes des autres, et améliore considérablement l'apprentissage.
    Dans de nombreux États, les valeurs des différentes actions sont très similaires et l'action à entreprendre est moins importante.
    Ceci est particulièrement important dans les environnements où il existe de nombreuses actions parmi lesquelles choisir. Dans DQN, à chaque itération 
    d'apprentissage, pour chacun des états du lot, nous mettons à jour les valeurs :ath:`Q` uniquement pour les actions spécifiques entreprises dans ces états.
